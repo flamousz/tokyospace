@@ -1,0 +1,6 @@
+@import url('./_variables.scss');
+
+.p-datepicker table td>span.p-highlight {
+	color: var(--text-white);
+	background: var(--bg-solid-brand);
+ }
