@@ -4,6 +4,9 @@
     <a routerLink="/dashboard" class="flex h-10 w-10 justify-center items-center">
         <ic-tokyospace class="h-5 w-5"></ic-tokyospace>
     </a>
+    <div
+    class="relative before:absolute before:left-2 before:right-2 before:border-b-2 pb-[6px]"
+    ></div>
     <div class="relative group">
         <a
             routerLink="/dashboard"
@@ -16,26 +19,23 @@
             <ic-home class="h-5 w-5"></ic-home>
         </a>
         <div
-            class="absolute left-full top-1/2 -translate-y-1/2 bg-white z-10 shadow rounded-lg max-w-0 overflow-hidden transition hover:p-1.5 hover:max-w-max group-hover:p-1.5 group-hover:max-w-max"
+            class="absolute left-full top-1/2 -translate-y-1/2 bg-white z-10 shadow rounded-lg max-w-0 overflow-hidden transition-all duration-500 hover:p-1.5 hover:max-w-max group-hover:p-1.5 group-hover:max-w-max"
         >
             <a routerLink="/dashboard" 
-            class="text-2xs text-text-subtler p-0.5"
+            class="text-2xs text-text-subtler p-0.5 w-max block"
             >DASHBOARD</a
             >
         </div>
-        <div
-        class="relative before:absolute before:left-2 before:right-2 before:border-b-2"
-        ></div>
-        <div class="relative group">
-            <a 
-                [routerLink]="Route.DRAG_N_DROP"
-                class="relative flex items-center justify-center h-10 w-10 mx-auto rounded-xl text-icon-subtle"
-                [ngClass]="{ 'bg-bg-tint-brand-subtle !text-icon-brand before:absolute before:top-2.5 before:bottom-2.5 before:left-0 before:bg-bg-solid-brand before:w-1 before:rounded-tr before:rounded-br': currentPath.includes(Route.DRAG_N_DROP)}">
-                <ic-wallet class="block h-5"/>
-            </a>
-            <div class="absolute left-full top-1/2 -translate-y-1/2 bg-white z-10 shadow rounded-lg max-w-0 overflow-hidden transition hover:p-1.5 hover:max-w-max group-hover:p-1.5 group-hover:max-w-max">
-                <a [routerLink]="Route.DRAG_N_DROP" class="block text-2xs text-text-subtler w-max p-0.5">DRAG AND DROP</a>
-            </div>
+    </div>
+    <div class="relative group">
+        <a 
+            [routerLink]="Route.DRAG_N_DROP"
+            class="relative flex items-center justify-center h-10 w-10 mx-auto rounded-xl text-icon-subtle"
+            [ngClass]="{ 'bg-bg-tint-brand-subtle !text-icon-brand before:absolute before:top-2.5 before:bottom-2.5 before:left-0 before:bg-bg-solid-brand before:w-1 before:rounded-tr before:rounded-br': currentPath.includes(Route.DRAG_N_DROP)}">
+            <ic-wallet class="block h-5"/>
+        </a>
+        <div class="absolute left-full top-1/2 -translate-y-1/2 bg-white z-10 shadow rounded-lg max-w-0 overflow-hidden transition-all duration-500 hover:p-1.5 hover:max-w-max group-hover:p-1.5 group-hover:max-w-max">
+            <a [routerLink]="Route.DRAG_N_DROP" class="block text-2xs text-text-subtler w-max p-0.5">DRAG AND DROP</a>
         </div>
     </div>
 </aside>
