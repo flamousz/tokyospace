@@ -51,6 +51,12 @@ module.exports = {
       },
       fontFamily: {
         'inter': ['Inter', 'sans-serif']
+      },
+      fontSize: {
+        '3xs': '0.5rem',
+        '2xs': '0.625rem',
+        '1.5xs': '0.688rem',
+        '0.5xs': '0.813rem',
       }
     },
   },
