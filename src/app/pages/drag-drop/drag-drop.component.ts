@@ -1,52 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardDragDropComponent } from '../../components/cards/card-drag-drop/card-drag-drop.component';
 import {CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop'
-import { CardDragDrop } from '../../interfaces/drag-drop.interface';
+import { CardDragDrop, DummyDragDrop } from '../../interfaces/drag-drop.interface';
+import { cardDragF, cardDragS } from '../../dummies/dragDrop.dummy';
+import { RestService } from '../../services/rest.service';
+import { lastValueFrom } from 'rxjs';
+import { TableDragDropComponent } from '../../components/tables/table-drag-drop/table-drag-drop.component';
 
 
 @Component({
   selector: 'app-drag-drop',
   standalone: true,
-  imports: [CardDragDropComponent, CardDragDropComponent, DragDropModule],
+  imports: [CardDragDropComponent, CardDragDropComponent, DragDropModule, TableDragDropComponent],
   templateUrl: './drag-drop.component.html',
   styleUrl: './drag-drop.component.scss'
 })
-export class DragDropComponent {
-  dragDroplist: CardDragDrop[] = [
-    {
-      header: 'Thrives',
-      description: 'Grateful in health, each day a gift, vitality thrives, joy abounds, blessings embraced.'
-    },
-    {
-      header: 'Tulip',
-      description: 'Grateful in health, each day a gift, vitality thrives, joy abounds, blessings embraced.'
-    },
-    {
-      header: 'Violet',
-      description: 'Grateful in health, each day a gift, vitality thrives, joy abounds, blessings embraced.'
-    },
-    {
-      header: 'Orchards',
-      description: 'Grateful in health, each day a gift, vitality thrives, joy abounds, blessings embraced.'
-    },
-    {
-      header: 'Sakura',
-      description: 'Grateful in health, each day a gift, vitality thrives, joy abounds, blessings embraced.'
-    },
-  ]
+export class DragDropComponent implements OnInit {
+  dragDroplist: CardDragDrop[] = cardDragF
 
-  dragDropTwolist: CardDragDrop[] = [
-    {
-      header: 'Lily',
-      description: 'Grateful in health, each day a gift, vitality thrives, joy abounds, blessings embraced.'
-    },
-    {
-      header: 'Daisy',
-      description: 'Grateful in health, each day a gift, vitality thrives, joy abounds, blessings embraced.'
-    },
-  ]
+  dragDropTwolist: CardDragDrop[] = cardDragS
 
+  //#region DATA FETCHING
+  dummyDragDropResponse?: DummyDragDrop[]
+  isDrag: boolean = false
+  //#endregion
 
+  constructor(private api: RestService) {}
+
+  async ngOnInit(): Promise<void> {
+    await this.getDragDropList()
+    console.log(this.dummyDragDropResponse,'v');
+  }
+
+  //#region FETCHING FUNC
+  async getDragDropList() {
+    try {
+      this.isDrag = true
+      this.dummyDragDropResponse = await lastValueFrom(this.api.getDragDrop())
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.isDrag = false
+    }
+  }
+  //#endregion
+
+  //#region DRAG DROP FUNC
   drop(event: CdkDragDrop<CardDragDrop[]>) {
     // moveItemInArray(this.dragDroplist, event.previousIndex, event.currentIndex)
 
@@ -64,9 +64,8 @@ export class DragDropComponent {
     // pake yg ini untuk id dan data
     console.log(event.container.id);
     console.log(event.container.data);
-    
-    
   }
+  //#endregion
 
 
 }

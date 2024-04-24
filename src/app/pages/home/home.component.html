@@ -1,7 +1,9 @@
 <main class="flex">
 	<app-sidebar></app-sidebar>
-	<section class="flex flex-col w-screen">
+	<section class="flex flex-col w-screen ">
 		<app-navbar></app-navbar>
-		<router-outlet></router-outlet>
+		<div class="flex grow overflow-auto ">
+			<router-outlet></router-outlet>
+		</div>
 	</section>
 </main>

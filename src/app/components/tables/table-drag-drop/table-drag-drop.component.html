@@ -1,0 +1,20 @@
+<p-table
+	[value]="dragDropLists()"
+>
+	<ng-template pTemplate="header">
+		<tr>
+			<th>Name</th>
+			<th>Category</th>
+			<th>Status</th>
+			<th>Description</th>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" let-dragDropLists>
+		<tr>
+			<td class="flex flex-row gap-1 items-center">{{dragDropLists.name}} <img width="3" height="3" [ngSrc]="dragDropLists.image" class="h-10 w-10 object-cover rounded-full"></td>
+			<td>{{dragDropLists.category}}</td>
+			<td>{{dragDropLists.status}}</td>
+			<td>{{dragDropLists.description}}</td>
+		</tr>
+	</ng-template>
+</p-table>

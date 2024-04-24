@@ -1,51 +1,88 @@
-<main class="p-2 grid grid-cols-3 h-[calc(100vh-2rem)] gap-2">
-   <section class="border-[.0938rem] border-line-default rounded-md h-full flex flex-col overflow-hidden example-list">
-      <h1 class="text-center font-semibold font-inter text-text-default text-lg bg-bg-tint-info py-1" >Section A</h1>
-      <div 
-	 	#beforeList="cdkDropList"
-	 	cdkDropList
-		(cdkDropListDropped)="drop($event)"
-		[cdkDropListData]="dragDroplist"
-		[cdkDropListConnectedTo]="[afterList]"
-	 	class="flex flex-col gap-2 overflow-auto grow p-2">
-         @for (dd of dragDroplist; track $index) {
-		<app-card-drag-drop
-            [dataCard]="dd"
-		  cdkDrag
-		  [cdkDragData]="dd"
-		  class="example-box"
-         ></app-card-drag-drop>
-	    }
-      </div>
-   </section>
-   <section class="border-[.0938rem] border-line-default rounded-md  h-full flex flex-col overflow-hidden">
-	<h1 class="text-center font-semibold font-inter text-text-default text-lg bg-bg-tint-brand-subtle py-1">Section B</h1>
-	<div 
-	#afterList="cdkDropList"
-	cdkDropList
-	[cdkDropListData]="dragDropTwolist"
-	[cdkDropListConnectedTo]="beforeList"
-	(cdkDropListDropped)="drop($event)"
-	class="flex flex-col gap-2 overflow-auto grow p-2">
-		@for (item of dragDropTwolist; track $index) {
+<main>
+	<section class="p-2 grid grid-cols-3 h-[calc(100vh-2rem)] gap-2">
+		<section class="border-[.0938rem] border-line-default rounded-md h-full flex flex-col overflow-hidden example-list">
+		   <h1 class="text-center font-semibold font-inter text-text-default text-lg bg-bg-tint-info py-1" >Section A</h1>
+		   <div 
+			   #beforeList="cdkDropList"
+			   cdkDropList
+			  (cdkDropListDropped)="drop($event)"
+			  [cdkDropListData]="dragDroplist"
+			  [cdkDropListConnectedTo]="[afterList]"
+			   class="flex flex-col gap-2 overflow-auto grow p-2">
+			 @for (dd of dragDroplist; track $index) {
+			  <app-card-drag-drop
+			    [dataCard]="dd"
+			    cdkDrag
+			    [cdkDragData]="dd"
+			    [CustomTemplate]="Custom"
+			    class="example-box"
+			 >
+			 <p class="font-inter font-medium text-md text-text-default" descf>{{dd.description}}</p>
+			 <h1 headerf  class="font-inter font-semibold text-lg text-text-discovery">{{dd.header}}</h1>
+			 </app-card-drag-drop>
+			 }
+		   </div>
+		</section>
+		<section class="border-[.0938rem] border-line-default rounded-md  h-full flex flex-col overflow-hidden">
+		  <h1 class="text-center font-semibold font-inter text-text-default text-lg bg-bg-tint-brand-subtle py-1">Section B</h1>
+		  <div 
+		  #afterList="cdkDropList"
+		  cdkDropList
+		  [cdkDropListData]="dragDropTwolist"
+		  [cdkDropListConnectedTo]="beforeList"
+		  (cdkDropListDropped)="drop($event)"
+		  class="flex flex-col gap-2 overflow-auto grow p-2">
+			  @for (item of dragDropTwolist; track $index) {
+				  <app-card-drag-drop
+					[dataCard]="item"
+					cdkDrag
+					[cdkDragData]="item"
+				  >
+				  <h1 
+				  headerf
+				  class="font-inter font-semibold text-lg text-text-discovery">{{item.header}}</h1>
+				  <p
+				  class="font-inter font-medium text-md text-text-default"
+				  descf
+				  >{{item.description}}</p>
+				  </app-card-drag-drop>
+			  }
+		  </div>
+	    </section>
+	    <section class="border-[.0938rem] border-line-default rounded-md   h-full flex flex-col overflow-hidden">
+		  <h1 class="text-center font-semibold font-inter text-text-default text-lg py-1 bg-bg-tint-discovery">Section C</h1>
+		  <div class="flex flex-col gap-2 overflow-auto grow p-2">
 			<app-card-drag-drop
-			   [dataCard]="item"
-			   cdkDrag
-			   [cdkDragData]="item"
-			></app-card-drag-drop>
+			   [dataCard]="{
+				 header: 'Sunflower',
+				 description:
+				    'Grateful in health, each day a gift, vitality thrives, joy abounds, blessings embraced.'
+			   }"
+			>
+			<h1 headerf class="font-inter font-semibold text-lg text-text-discovery">{{'Sunflower'}}</h1>
+			<h1 headers class="font-inter font-semibold text-lg text-text-discovery">&bull;</h1>
+			<p class="font-inter font-medium text-md text-text-default"
+			descf
+			>Grateful in health, each day a gift, vitality thrives, joy abounds, blessings embraced.</p>
+			</app-card-drag-drop>
+		  </div>
+	    </section>
+	</section>
+	<section 
+		#TableSection
+		class="flex flex-col p-2"
+	>
+		@defer (on viewport;) {
+			<app-table-drag-drop [dragDropLists]="dummyDragDropResponse!"></app-table-drag-drop>
+		}@placeholder {
+			<h1>d</h1>
 		}
-	</div>
-  </section>
-   <section class="border-[.0938rem] border-line-default rounded-md   h-full flex flex-col overflow-hidden">
-	<h1 class="text-center font-semibold font-inter text-text-default text-lg py-1 bg-bg-tint-discovery">Section C</h1>
-	<div class="flex flex-col gap-2 overflow-auto grow p-2">
-	   <app-card-drag-drop
-		 [dataCard]="{
-		    header: 'Sunflower',
-		    description:
-			  'Grateful in health, each day a gift, vitality thrives, joy abounds, blessings embraced.'
-		 }"
-	   ></app-card-drag-drop>
-	</div>
-  </section>
+	</section>
 </main>
+
+
+
+
+<ng-template #Custom>
+	<h1 class="font-inter font-semibold text-lg text-text-discovery">&bull;</h1>
+</ng-template>
