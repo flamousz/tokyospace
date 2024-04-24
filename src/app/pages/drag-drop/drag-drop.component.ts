@@ -6,6 +6,7 @@ import { cardDragF, cardDragS } from '../../dummies/dragDrop.dummy';
 import { RestService } from '../../services/rest.service';
 import { lastValueFrom } from 'rxjs';
 import { TableDragDropComponent } from '../../components/tables/table-drag-drop/table-drag-drop.component';
+import { slideInAnimation } from '../../animations/global.animation';
 
 
 @Component({
@@ -13,23 +14,27 @@ import { TableDragDropComponent } from '../../components/tables/table-drag-drop/
   standalone: true,
   imports: [CardDragDropComponent, CardDragDropComponent, DragDropModule, TableDragDropComponent],
   templateUrl: './drag-drop.component.html',
-  styleUrl: './drag-drop.component.scss'
+  styleUrl: './drag-drop.component.scss',
+  animations: [
+    slideInAnimation
+  ]
 })
 export class DragDropComponent implements OnInit {
   dragDroplist: CardDragDrop[] = cardDragF
 
   dragDropTwolist: CardDragDrop[] = cardDragS
 
-  //#region DATA FETCHING
+  //#region DATA TABLE FETCHING
   dummyDragDropResponse?: DummyDragDrop[]
   isDrag: boolean = false
+  isTableFetch: boolean = false
   //#endregion
+
+  
 
   constructor(private api: RestService) {}
 
   async ngOnInit(): Promise<void> {
-    await this.getDragDropList()
-    console.log(this.dummyDragDropResponse,'v');
   }
 
   //#region FETCHING FUNC
@@ -64,6 +69,18 @@ export class DragDropComponent implements OnInit {
     // pake yg ini untuk id dan data
     console.log(event.container.id);
     console.log(event.container.data);
+  }
+  //#endregion
+
+  //#region TABLE FUNC
+  async dataTableFect() {
+    if (this.isTableFetch) await this.getDragDropList();
+  }
+
+  async  emitTable(inp: boolean) {
+    this.isTableFetch = inp
+
+    await this.dataTableFect()
   }
   //#endregion
 

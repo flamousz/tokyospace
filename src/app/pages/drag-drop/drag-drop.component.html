@@ -1,5 +1,9 @@
 <main>
-	<section class="p-2 grid grid-cols-3 h-[calc(100vh-2rem)] gap-2">
+	<!-- height dari CardDragDrop bisa diatur dengan vh nya -->
+	<section 
+		#CardDragDrop
+		class="p-2 grid grid-cols-3 h-[calc(100vh-2rem)] gap-2"
+	>
 		<section class="border-[.0938rem] border-line-default rounded-md h-full flex flex-col overflow-hidden example-list">
 		   <h1 class="text-center font-semibold font-inter text-text-default text-lg bg-bg-tint-info py-1" >Section A</h1>
 		   <div 
@@ -73,9 +77,11 @@
 		class="flex flex-col p-2"
 	>
 		@defer (on viewport;) {
-			<app-table-drag-drop [dragDropLists]="dummyDragDropResponse!"></app-table-drag-drop>
+			<app-table-drag-drop (flagInit)="emitTable($event)" [dragDropLists]="dummyDragDropResponse!"></app-table-drag-drop>
 		}@placeholder {
 			<h1>d</h1>
+		}@loading {
+			<h3>2wqdqwd</h3>
 		}
 	</section>
 </main>

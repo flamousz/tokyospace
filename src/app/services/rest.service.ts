@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../environment/environment';
+import { environment, isProduction } from '../environment/environment';
 import { timeout } from 'rxjs';
 import { DummyDragDrop } from '../interfaces/drag-drop.interface';
 
@@ -8,14 +8,17 @@ import { DummyDragDrop } from '../interfaces/drag-drop.interface';
   providedIn: 'root'
 })
 export class RestService {
+  apiUrl: string = ''
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    isProduction ? this.apiUrl = environment.API_PROD : this.apiUrl = environment.API_URL
+  }
 
 
   getDragDrop() {
 
     return this.http
-    .get<DummyDragDrop[]>(`${environment.API_URL}/dragdrop`)
+    .get<DummyDragDrop[]>(`${this.apiUrl}/dragdrop`)
     .pipe(timeout(environment.REQUEST_TIMEOUT_MS))
   }
 }

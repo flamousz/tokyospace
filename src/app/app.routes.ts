@@ -1,3 +1,4 @@
+import { animation } from '@angular/animations';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -14,12 +15,18 @@ export const routes: Routes = [
 			{
 				path: 'dashboard',
 				title: 'Dashboard | Tokyospace',
-				loadComponent: () => import('./pages/dashboard/dashboard.component').then(c => c.DashboardComponent)
+				loadComponent: () => import('./pages/dashboard/dashboard.component').then(c => c.DashboardComponent),
+				data: {
+					animation: 'dudu'
+				}
 			},
 			{
 				path: 'drag-drop',
 				title: 'Drag n Drop | Tokyospace',
-				loadComponent: () => import('./pages/drag-drop/drag-drop.component').then(c => c.DragDropComponent)
+				loadComponent: () => import('./pages/drag-drop/drag-drop.component').then(c => c.DragDropComponent),
+				data: {
+					animation: 'dada'
+				}
 
 			}
 		]
